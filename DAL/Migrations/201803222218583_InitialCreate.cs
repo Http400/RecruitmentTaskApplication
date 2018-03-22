@@ -12,10 +12,13 @@ namespace DAL.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 200),
+                        Email = c.String(nullable: false, maxLength: 200),
+                        Name = c.String(),
                         Surname = c.String(),
                         PhoneNumber = c.String(),
                         Address = c.String(),
+                        HashedPassword = c.String(),
+                        Salt = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             

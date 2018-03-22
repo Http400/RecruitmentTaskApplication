@@ -1,2 +1,21 @@
-﻿
-This is Home Page
+﻿<div class="container">
+    This is Home Page
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in vm.users">
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>{{ user.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

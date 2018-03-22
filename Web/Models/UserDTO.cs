@@ -1,6 +1,6 @@
-﻿namespace DAL.Entities
+﻿namespace Web.Models
 {
-    public class User : IEntityBase
+    public class UserDTO
     {
         public int ID { get; set; }
         public string Email { get; set; }
@@ -8,7 +8,5 @@
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public string HashedPassword { get; set; }
-        public string Salt { get; set; }
     }
 }

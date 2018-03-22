@@ -53,14 +53,15 @@
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Entities\IEntityBase.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="Infrastructure\DbFactory.cs" />
     <Compile Include="Infrastructure\Disposable.cs" />
     <Compile Include="Infrastructure\IDbFactory.cs" />
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201803221632486_InitialCreate.cs" />
-    <Compile Include="Migrations\201803221632486_InitialCreate.Designer.cs">
-      <DependentUpon>201803221632486_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201803222218583_InitialCreate.cs" />
+    <Compile Include="Migrations\201803222218583_InitialCreate.Designer.cs">
+      <DependentUpon>201803222218583_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyDatabaseContext.cs" />
@@ -73,8 +74,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803221632486_InitialCreate.resx">
-      <DependentUpon>201803221632486_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803222218583_InitialCreate.resx">
+      <DependentUpon>201803222218583_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

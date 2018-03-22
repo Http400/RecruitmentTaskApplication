@@ -1,9 +1,4 @@
 ﻿using DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Configurations
 {
@@ -11,7 +6,7 @@ namespace DAL.Configurations
     {
         public UserConfiguration()
         {
-            Property(u => u.Name).IsRequired().HasMaxLength(200);
+            Property(u => u.Email).IsRequired().HasMaxLength(200);
         }
     }
 }
