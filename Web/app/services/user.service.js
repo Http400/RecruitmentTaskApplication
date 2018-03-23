@@ -10,6 +10,9 @@
     function userService($rootScope, $http, $cookieStore) {
         return {
             getUsers: _getUsers,
+            getUser: _getUser,
+            editUser: _editUser,
+            changePassword: _changePassword,
             signUp: _signUp,
             signIn: _signIn,
             saveCredentials: _saveCredentials,
@@ -20,6 +23,18 @@
 
         function _getUsers() {
             return $http.get('/api/User/GetUsers');
+        }
+
+        function _getUser() {
+            return $http.get('/api/User/GetUser');
+        }
+
+        function _editUser(userData) {
+            return $http.put('/api/User/EditUser', userData);
+        }
+
+        function _changePassword(changePasswordData) {
+            return $http.put('/api/User/ChangePassword', changePasswordData);
         }
 
         function _signUp(signUpData) {

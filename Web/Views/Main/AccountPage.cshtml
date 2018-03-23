@@ -1,0 +1,45 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Edit Your Profile</h3>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" ng-model="vm.user.Name">
+                </div>
+                <div class="form-group">
+                    <label for="surname">Surname:</label>
+                    <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" ng-model="vm.user.Surname">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone number:</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone" ng-model="vm.user.PhoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" ng-model="vm.user.Address">
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="vm.editUser()">Save changes</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Change password</h3>
+            <form>
+                <div class="form-group">
+                    <label for="oldPwd">Current password:</label>
+                    <input type="password" class="form-control" id="oldPwd" placeholder="Enter current password" name="oPswd" ng-model="vm.changePasswordData.currentPassword">
+                </div>
+                <div class="form-group">
+                    <label for="newPwd">New password:</label>
+                    <input type="password" class="form-control" id="newPwd" placeholder="Enter new password" name="nPswd" ng-model="vm.changePasswordData.newPassword">
+                </div>
+                <div class="form-group">
+                    <label for="repeatPwd">Repeat new password:</label>
+                    <input type="password" class="form-control" id="repeatPwd" placeholder="Repeat new password" name="rPswd" ng-model="vm.changePasswordData.repeatPassword">
+                    <p ng-if="vm.changePasswordData.newPassword!==vm.changePasswordData.repeatPassword" class="text-danger">Repeat password correctly</p>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="vm.changePassword()">Change password</button>
+            </form>
+        </div>
+    </div>
+</div>

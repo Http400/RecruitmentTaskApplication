@@ -9,12 +9,17 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult Layout()
+        {
+            return PartialView();
+        }
+
         public ActionResult HomePage()
         {
             return PartialView();
         }
 
-        public ActionResult Layout()
+        public ActionResult AccountPage()
         {
             return PartialView();
         }

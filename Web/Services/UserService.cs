@@ -67,12 +67,12 @@ namespace Web.Services
             string email = identity.Name;
             if (!String.IsNullOrWhiteSpace(email))
             {
-                var userId = _userRepository.GetSingleByEmail(email).ID;
-                return userId;
+                var user = _userRepository.GetSingleByEmail(email);
+                return user.ID;
             }
             else
             {
-                throw new Exception("Passed empty email.");
+                throw new Exception("GetUserId: Empty email.");
             }
         }
 
@@ -95,6 +95,54 @@ namespace Web.Services
             }
 
             return result;
+        }
+
+        public UserDTO GetUser(int id)
+        {
+            var user = _userRepository.GetSingle(id);
+            return new UserDTO()
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address
+            };
+        }
+
+        public void EditUser(int id, UserDTO userData)
+        {
+            var user = _userRepository.GetSingle(id);
+            if (user == null)
+                throw new Exception("EditUser: User not found");
+
+            user.Name = userData.Name;
+            user.Surname = userData.Surname;
+            user.PhoneNumber = userData.PhoneNumber;
+            user.Address = userData.Address;
+
+            _userRepository.Edit(user);
+            _unitOfWork.Commit();
+        }
+
+        public void ChangePassword(int userId, string oldPassword, string newPassword)
+        {
+            var user = _userRepository.GetSingle(userId);
+
+            if (user == null)
+            {
+                throw new Exception("ChangePassword: User not found.");
+            }
+            else if (!isUserValid(user, oldPassword) || newPassword == null)
+            {
+                throw new WrongPasswordException();
+            }
+            else
+            {
+                var passwordSalt = Encryption.CreateSalt();
+                user.Salt = passwordSalt;
+                user.HashedPassword = Encryption.EncryptPassword(newPassword, passwordSalt);
+                _unitOfWork.Commit();
+            }
         }
 
         private bool isPasswordValid(User user, string password)

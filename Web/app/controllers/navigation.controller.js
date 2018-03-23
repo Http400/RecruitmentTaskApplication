@@ -5,10 +5,9 @@
 		.module('app')
 		.controller('navigationController', navigationController);
 
-    navigationController.$inject = ['userService'];
+    navigationController.$inject = ['$state', 'userService'];
 
-    function navigationController(userService) {
-        console.log('this is navigationController');
+    function navigationController($state, userService) {
         var vm = this;
         vm.user = {};
         vm.signedInUserEmail = '';
@@ -21,7 +20,6 @@
             console.log('signinin in');
             userService.signIn(vm.user)
                 .then(function (response) {
-                    console.log(response);
                     userService.saveCredentials(response.data);
                     vm.user = {};
                     angular.element('#logInModal').modal('hide');
@@ -35,7 +33,6 @@
         vm.signUp = function () {
             userService.signUp(vm.user)
                 .then(function (response) {
-                    console.log(response);
                     vm.user = {};
                     vm.successMessage = response.data;
                 }).catch(function (response) {
@@ -46,7 +43,11 @@
 
         vm.signOut = function () {
             userService.removeCredentials();
-            vm.signedInUserEmail = '';
+            if ($state.is('layout.account')) {
+                $state.go('layout.home');
+            } else {
+                vm.signedInUserEmail = null;
+            }
         }
 
         vm.clearMessages = function () {
@@ -56,12 +57,6 @@
 
         function _getSignedInUser() {
             vm.signedInUserEmail = userService.getSignedInUserEmail();
-            console.log(vm.signedInUserEmail);
-            //$scope.userData.isUserLoggedIn = userService.isUserLoggedIn();
-
-            //if ($scope.userData.isUserLoggedIn) {
-            //    $scope.username = $rootScope.repository.loggedUser.email;
-            //}
         }
     }
 }());

@@ -11,5 +11,8 @@ namespace Web.Services.Interfaces
         User CreateUser(SignUpDTO signUpData);
         int GetUserId(IIdentity identity);
         List<UserDTO> GetUsers();
+        UserDTO GetUser(int id);
+        void EditUser(int id, UserDTO userData);
+        void ChangePassword(int userId, string oldPassword, string newPassword);
     }
 }
