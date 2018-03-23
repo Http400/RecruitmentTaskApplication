@@ -57,9 +57,9 @@ namespace Web.Controllers.api
         {
             try
             {
-                var user = _userService.CreateUser(signUpData.Email, signUpData.Password);
+                var user = _userService.CreateUser(signUpData);
                 if (user != null)
-                    return Ok("Your account has been created.");
+                    return Ok("Your account has been created. Now You can sign in.");
                 else
                     throw new Exception();
             }

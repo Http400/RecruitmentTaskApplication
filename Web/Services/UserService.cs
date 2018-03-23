@@ -34,9 +34,9 @@ namespace Web.Services
                 return null;
         }
 
-        public User CreateUser(string email, string password)
+        public User CreateUser(SignUpDTO signUpData)
         {
-            var existingUser = _userRepository.GetSingleByEmail(email);
+            var existingUser = _userRepository.GetSingleByEmail(signUpData.Email);
 
             if (existingUser != null)
             {
@@ -48,8 +48,12 @@ namespace Web.Services
             var user = new User()
             {
                 Salt = passwordSalt,
-                Email = email,
-                HashedPassword = Encryption.EncryptPassword(password, passwordSalt),
+                Email = signUpData.Email,
+                HashedPassword = Encryption.EncryptPassword(signUpData.Password, passwordSalt),
+                Name = signUpData.Name,
+                Surname = signUpData.Surname,
+                PhoneNumber = signUpData.PhoneNumber,
+                Address = signUpData.Address
             };
 
             _userRepository.Add(user);

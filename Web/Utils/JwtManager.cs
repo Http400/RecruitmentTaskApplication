@@ -14,10 +14,8 @@ namespace Web.Utils
         {
             var symmetricKey = Convert.FromBase64String(Secret);
             var tokenHandler = new JwtSecurityTokenHandler();
-
-            // TODO:
-            // This issue needs to be fixed.
-            var now = DateTime.UtcNow;//.AddHours(2);
+            
+            var now = DateTime.UtcNow;
 
             var subject = new ClaimsIdentity(new[]
                         {

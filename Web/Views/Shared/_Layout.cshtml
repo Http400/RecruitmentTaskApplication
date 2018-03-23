@@ -3,18 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>No one's gonna do it for You!</title>
+    <title>Users contacts database</title>
     <base href="@VirtualPathUtility.AppendTrailingSlash(Request.ApplicationPath)" />
     @Styles.Render("~/Content/css")
 
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.0.0.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/angular.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/angular-cookies.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/angular-ui-router.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
-    @*<script type="text/javascript" src="@Url.Content("~/scripts/angular-route.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/angular-cookies.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/angular-sanitize.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/angular-animate.min.js")"></script>*@
     
     @Scripts.Render("~/bundles/script")
 </head>

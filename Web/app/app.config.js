@@ -3,7 +3,8 @@
 
     angular
 		.module('app')
-		.config(routeConfig);
+		.config(routeConfig)
+        .run(run);
 
     routeConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
 
@@ -13,6 +14,7 @@
             .state('layout', {
 			    templateUrl: 'Main/Layout',
 			    controller: 'navigationController',
+			    controllerAs: 'vm',
 			    abstract: true
 			})
         	    .state('layout.home', {
@@ -87,6 +89,22 @@
 
         //$locationProvider.html5Mode(true);
         //$locationProvider.hashPrefix('');
+    }
+
+    run.$inject = ['$rootScope', '$cookieStore', '$http', 'userService'];
+
+    function run($rootScope, $cookieStore, $http, userService) {
+        // handle page refreshes
+        $rootScope.repository = $cookieStore.get('repository') || {};
+
+        if ($rootScope.repository.user) {
+            var tokenExp = new Date($rootScope.repository.user.tokenExp * 1000);
+            if (tokenExp >= Date.now()) {
+                $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.repository.user.token;
+            } else {
+                userService.removeCredentials();
+            }
+        }
     }
 
     //isAdminAuthenticated.$inject = ['$state'];

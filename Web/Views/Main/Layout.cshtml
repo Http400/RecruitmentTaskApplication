@@ -6,33 +6,18 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbarNavDropdown" class="navbar-collapse collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-
-            </ul>
             <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                <li ng-if="vm.signedInUserEmail!==''" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        john@doe.com
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Account</a>
+                        <a class="dropdown-item" href="" ng-click="vm.signOut()">Sign Out</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#logInModal">Register</a>
+                <li ng-if="vm.signedInUserEmail===''" class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#logInModal">Sign In</a>
                 </li>
             </ul>
         </div>
@@ -40,12 +25,12 @@
 </div>
 
 
-
-<div class="jumbotron">
-    <h1>Bootstrap Tutorial</h1>
-    <p>Bootstrap is the most popular HTML, CSS...</p>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Users Database</h1>
+        <p>All users contact info</p>
+    </div>
 </div>
-
 
 <div data-ui-view></div>
 
@@ -57,38 +42,41 @@
 
             <div class="modal-header">
                 <h4 class="modal-title">Welcome</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" ng-click="vm.clearMessages()" data-dismiss="modal">&times;</button>
             </div>
 
             <div class="modal-body">
+                <p class="text-danger">{{ vm.errorMessage }}</p>
+                <p class="text-succes">{{ vm.successMessage }}</p>
                 <form>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" ng-model="vm.user.email">
                     </div>
                     <div class="form-group" ng-init="signinUp=false" ng-show="signinUp">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" ng-model="vm.user.name">
                     </div>
                     <div class="form-group" ng-show="signinUp">
                         <label for="surname">Surname:</label>
-                        <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname">
+                        <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" ng-model="vm.user.surname">
                     </div>
                     <div class="form-group" ng-show="signinUp">
                         <label for="phone">Phone number:</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone" ng-model="vm.user.phoneNumber">
                     </div>
                     <div class="form-group" ng-show="signinUp">
                         <label for="address">Address:</label>
-                        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+                        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" ng-model="vm.user.address">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" ng-model="vm.user.password">
                     </div>
                     <div class="form-group" ng-show="signinUp">
                         <label for="repeatPwd">Repeat password:</label>
-                        <input type="password" class="form-control" id="repeatPwd" placeholder="Repeat password" name="rPswd">
+                        <input type="password" class="form-control" id="repeatPwd" placeholder="Repeat password" name="rPswd" ng-model="vm.user.repeatPassword">
+                        <p ng-if="vm.user.password!==vm.user.repeatPassword" class="text-danger">Repeat password correctly</p>
                     </div>
                 </form>
             </div>
@@ -96,8 +84,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-link" ng-show="!signinUp" ng-click="signinUp=true">Don't have account?</button>
                 <button type="button" class="btn btn-link" ng-show="signinUp" ng-click="signinUp=false">I already have account</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" ng-show="signinUp" ng-click="vm.signUp()">Sign Up</button>
+                <button type="submit" class="btn btn-primary" ng-show="!signinUp" ng-click="vm.signIn()">Sign In</button>
+                <button type="button" class="btn btn-danger" ng-click="vm.clearMessages()" data-dismiss="modal">Close</button>
             </div>
 
         </div>

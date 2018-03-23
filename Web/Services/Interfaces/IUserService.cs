@@ -8,7 +8,7 @@ namespace Web.Services.Interfaces
     public interface IUserService
     {
         string ValidateUser(string email, string password);
-        User CreateUser(string email, string password);
+        User CreateUser(SignUpDTO signUpData);
         int GetUserId(IIdentity identity);
         List<UserDTO> GetUsers();
     }
