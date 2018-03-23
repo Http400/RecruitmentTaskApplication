@@ -32,7 +32,7 @@
                     <a class="nav-link" href="{{ url('/login') }}">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Register</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#logInModal">Register</a>
                 </li>
             </ul>
         </div>
@@ -48,3 +48,58 @@
 
 
 <div data-ui-view></div>
+
+
+<!-- Log in Modal -->
+<div class="modal fade" id="logInModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">Welcome</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="form-group" ng-init="signinUp=false" ng-show="signinUp">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                    </div>
+                    <div class="form-group" ng-show="signinUp">
+                        <label for="surname">Surname:</label>
+                        <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname">
+                    </div>
+                    <div class="form-group" ng-show="signinUp">
+                        <label for="phone">Phone number:</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" name="phone">
+                    </div>
+                    <div class="form-group" ng-show="signinUp">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                    </div>
+                    <div class="form-group" ng-show="signinUp">
+                        <label for="repeatPwd">Repeat password:</label>
+                        <input type="password" class="form-control" id="repeatPwd" placeholder="Repeat password" name="rPswd">
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" ng-show="!signinUp" ng-click="signinUp=true">Don't have account?</button>
+                <button type="button" class="btn btn-link" ng-show="signinUp" ng-click="signinUp=false">I already have account</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

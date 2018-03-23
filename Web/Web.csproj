@@ -200,6 +200,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SignInDTO.cs" />
+    <Compile Include="Models\SignUpDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interfaces\IUserService.cs" />
